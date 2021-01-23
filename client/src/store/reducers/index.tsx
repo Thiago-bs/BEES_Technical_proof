@@ -1,0 +1,8 @@
+import { combineReducers } from 'redux';
+import cartReducer from './cart';
+
+export default combineReducers({
+    cartReducer,
+})
+
+// {cart : {activeCart: {}, products: []}}

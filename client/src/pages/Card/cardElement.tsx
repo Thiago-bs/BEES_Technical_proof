@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { Plus } from '@styled-icons/boxicons-regular/Plus';
 import { Minus } from '@styled-icons/boxicons-regular/Minus';
 import { NavLink as Link } from 'react-router-dom';
-
+import * as Util from '../Util/grid'
+// Card elements
 export const CardWrapper = styled.div`
     overflow: hidden;
     padding: 0 0 32px;
@@ -13,6 +14,26 @@ export const CardWrapper = styled.div`
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
     border-radius: 5px;
     position: relative; 
+`;
+
+export const CardWrapperCustom = styled.div`
+    overflow: hidden;
+    padding: 0 0 32px;
+    margin: 48px auto 0;
+    font-family: Quicksand, arial, sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    position: relative; 
+    margin-bottom: 10%;
+    @media only screen and (max-width: 768px){
+        width: ${props => Util.getWidthGrid(props.theme.devices.mobile)};
+    }
+    @media only screen and (min-width: 768px){
+        width: ${props => Util.getWidthGrid(props.theme.devices.tablet)};
+    }
+    @media only screen and (min-width: 1000px){
+        width: ${props => Util.getWidthGrid(props.theme.devices.desktop)};
+    }
 `;
 
 export const CardHeader = styled.header`
@@ -31,13 +52,14 @@ export const CardHeading = styled.h1`
     height: auto;
     max-width:200px;
     max-height:150px;
+    width: 100px;
+    height: 150px;
     justify-content: center;
 `;
 
 export const CardBody = styled.div`
     padding-right: 16px;
     padding-left: 16px;
-    position: absolute;
     width: 100%;
     bottom: 1;
 `;
@@ -48,18 +70,20 @@ export const CardFooter = styled.div`
     padding-top: 32px;
     padding-bottom: 16px;
     position: absolute;
+    width: 100%;
     bottom: 0;
 `
 export const CardInput = styled.input`
   padding: 7px 0;
   width: 100%;
   font-size: 14px;
-  text-align:center;
+  text-align:left;
+  padding-left: 10px;
   border: 1px solid #ddd;
   transition: border-bottom-color 0.25s ease-in;
   align-items: center;
   &:focus {
-    border-bottom-color: #e5195f;
+    border-bottom-color: #1a9ff1;
     outline: 0;
   }
   background-color: #fff;
@@ -69,6 +93,25 @@ export const CardInput = styled.input`
 export const CardOptionsItem = styled.li`
   &:nth-of-type(n + 2) {
     margin-left: 16px;
+  }
+`;
+
+export const CardFieldset = styled.fieldset`
+  position: relative;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 100%;
+  & + & {
+    margin-top: 24px;
+  }
+
+  &:nth-last-of-type(2) {
+    margin-top: 32px;
+  }
+
+  &:last-of-type {
+    text-align: center;
   }
 `;
 
@@ -83,9 +126,9 @@ export const CardIcon = styled.span`
   border-style: solid;
   border-color: ${props => props.theme.color};
   border-width: 2px;
-  
- 
 `;
+
+// End Card Element
 
 export const PlusCircleCustom = styled(Plus)`
     border-color: ${props => props.theme.color};
@@ -140,6 +183,7 @@ export const CardButton = styled.button`
     transform: translate(0, -3px);
   }
   color: #7796be;
+  background:#fff;
   font-size: 15px;
 `;
 
@@ -165,7 +209,13 @@ export const BeerCost = styled.h1`
     font-style: bold;
     padding-top: 1em;
 `
-
+export const BeerAmount = styled.h1`
+    font-size: 0.6em;
+    text-align: left;
+    color: #393939;
+    font-style: bold;
+    padding-top: 0.2em;
+`
 export const BeerPromotion = styled.h1`
     font-size: 0.5em;
     text-align: left;
@@ -180,6 +230,8 @@ export const BeerViewLink = styled(Link)`
     color: #7796be;
     font-style: bold;
 `
+
+
 
 export const Button = styled.button`
     background: transparent;

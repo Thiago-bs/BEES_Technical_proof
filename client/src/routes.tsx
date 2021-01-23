@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MainPanel from './pages/MainPanel/mainPanel';
-import BeerForm from './pages/BeerForm/beerForm';
 import NavBar from './pages/NavBar/navBar'
+import Cart from './pages/Cart/cart';
 
 function Routes() {
     return (
@@ -10,7 +10,7 @@ function Routes() {
             <NavBar></NavBar>
             <Switch>
                 <Route path="/" exact component={MainPanel} />
-                <Route path="/add-beer" component={BeerForm} />
+                <Route path="/cart" component={Cart} />
             </Switch>
         </BrowserRouter>
     );

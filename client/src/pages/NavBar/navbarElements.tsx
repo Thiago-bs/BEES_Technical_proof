@@ -15,8 +15,8 @@ export const Nav = styled.nav`
 export const NavLink = styled(Link)`
   color: #fff;
   text-decoration: none;
-  padding: 0 1rem;
-  height: 100%;
+  padding: 0 0.2rem;
+  height: 10%;
   cursor: pointer;
   &.active {
     color: #15cdfc;
@@ -48,4 +48,15 @@ export const TitleButton = styled.h1`
     padding: 0.25em 1em;
     border: 2px solid;
     border-radius: 3px;
+`
+export const TitleNotification = styled.div`
+  font-size: 0.8em;
+  text-align: center;
+  width: auto;
+  color: #fff;
+  background-color: #e9093a;
+  padding: 0.25em 1em;
+  border: 2px solid;
+  border: 2px solid;
+  border-radius: 3px;
 `

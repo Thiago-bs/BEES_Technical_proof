@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-function getWidthGrid(value: any) {
+export function getWidthGrid(value: any) {
 
     if (!value) return;
 
@@ -9,8 +9,6 @@ function getWidthGrid(value: any) {
 }
 
 export const Container = styled.div`
-    padding-right: 15px;
-    padding-right: 15px;
     box-sizing: border-box;
     &:before,
     &:after {
@@ -53,6 +51,7 @@ export const Column = styled.div`
     @media only screen and (min-width: 1000px){
         width: ${props => getWidthGrid(props.theme.devices.desktop)};
     }
+    margin-bottom: 1%;
 `;
 
 export const ColumnCustom = styled.div`

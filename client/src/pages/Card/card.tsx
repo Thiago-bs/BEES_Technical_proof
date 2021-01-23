@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import api from '../../services/api';
-
+import { connect, useDispatch } from 'react-redux';
+import { Container, Row, Column, ColumnCustom } from '../Util/grid';
 import {
     CardWrapper,
     CardHeader,
@@ -19,8 +20,10 @@ import {
     BeerViewLink,
     Button
 } from "./cardElement";
-
-import { Container, Row, Column, ColumnCustom } from '../Util/grid';
+import Beer from '../../models/Beer'
+import * as CartActions from '../../store/actions/cart';
+import { Dispatch } from "redux";
+import * as UtilStore from '../../store/Util/util';
 
 const definedColumn = {
     devices: {
@@ -30,44 +33,56 @@ const definedColumn = {
     }
 }
 
-interface Beer {
-    id: number;
-    name: string;
-    detail: string;
-    cost: number;
-    promotion: string;
-    image_url: string;
-    amount: number;
-}
-function Card() {
-    const [beers, setBeers] = useState<Beer[]>([]);
+function Card(state: any) {
 
-    // Execute on load page, just only once
+    const [beersNotSorted, setBeers] = useState<Beer[]>([]);
+    let beers = beersNotSorted.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+    beers = beers.map(beer=> ({ ...beer, notActive: true }))
+
+    const cart = state.state.cartReducer;
+    const dispatch: Dispatch<any> = useDispatch();
+
     useEffect(() => {
         api.get('beers').then(response => {
             setBeers(response.data);
+            console.log(response.data)
         });
     }, []);
 
     function amoundHandleClick(isAdd: boolean, beer: Beer) {
-
         let value = 0;
         if (!isAdd && beer.amount !== 0) {
-            console.log("entrei aqui ?")
             value = -1;
         }
         if (isAdd) {
             value = 1;
         }
-        let changedBeers = beers.map(obj => {
-            if (obj.id === beer.id) {
-                obj.amount = obj.amount + value;
+        let changedBeers = beers.map(element => {
+            if (element.id === beer.id) {
+                element.amount = element.amount + value;
             }
-            return obj;
+            return element;
         })
         setBeers(changedBeers);
     }
 
+    function addToCart(beerToAdd: Beer){
+        console.log(beerToAdd.amount, "see here")
+        console.log(beerToAdd, "see here2")
+        if(beerToAdd.amount === 0) {
+            alert("TO ADD TO THE CART YOU NEED TO ADD AT LEAST ONE!");
+            return
+        }
+        dispatch(CartActions.changeCart(cart, beerToAdd));
+        let changedBeers = beers.map(element => {
+            if (element.id === beerToAdd.id) {
+                element.amount = 0;
+            }
+            return element;
+        })
+        setBeers(changedBeers);
+        alert("BEER ADDED TO CART");
+    }
     return (
         <div>
             <Container>
@@ -89,7 +104,7 @@ function Card() {
                                     </CardBody>
                                     <CardFooter>
                                         <ColumnCustom theme={{ column: 1.5 }}>
-                                            <Button onClick={() => amoundHandleClick(false, beer)}>
+                                            <Button onClick={() => amoundHandleClick(false, beer)} >
                                                 <MinusCircleCustom theme={{ color: '#bfc2c0' }} >
                                                 </MinusCircleCustom>
                                             </Button>
@@ -99,13 +114,13 @@ function Card() {
                                             </CardInput>
                                         </ColumnCustom>
                                         <ColumnCustom theme={{ column: 1.5 }}>
-                                            <Button onClick={() => amoundHandleClick(true, beer)}>
+                                            <Button onClick={() => amoundHandleClick(true, beer)} >
                                                 <PlusCircleCustom theme={{ color: '#bfc2c0' }}>
                                                 </PlusCircleCustom>
                                             </Button>
                                         </ColumnCustom>
                                         <ColumnCustom theme={{ column: 4 }}>
-                                            <CardButton disabled>ADD</CardButton>
+                                            <CardButton onClick={() => addToCart(beer)}>ADD</CardButton>
                                         </ColumnCustom>
                                     </CardFooter>
                                 </CardWrapper>
@@ -114,8 +129,10 @@ function Card() {
                     })}
                 </Row>
             </Container>
+
         </div>
     );
 }
 
-export default Card;
+
+export default connect(UtilStore.mapStateToProps)(Card);

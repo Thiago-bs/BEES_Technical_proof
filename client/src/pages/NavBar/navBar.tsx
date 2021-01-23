@@ -5,19 +5,13 @@ import {
     Title,
     NavLinkButton,
     TitleButton,
+    TitleNotification
 } from './navbarElements'
+import { Container, Row, ColumnCustom } from '../Util/grid';
+import { connect } from 'react-redux';
+import * as UtilStore from '../../store/Util/util';
 
-import {Container, Row, ColumnCustom } from '../Util/grid';
-
-const definedColumn = {
-    devices: {
-        mobile: 12,
-        tablet: 6,
-        desktop: 4,
-    }
-}
-
-function navBar() {
+function navBar(state: any) {
     return (
         <div>
             <Nav>
@@ -28,14 +22,12 @@ function navBar() {
                                 <Title>ANHEUSER-BUSCH INBEV</Title>
                             </NavLink>
                         </ColumnCustom>
-                        <ColumnCustom theme={{ column: 6 }}>
-                            <NavLinkButton to='/add-beer'>
-                                <TitleButton>ADD PRODUCT</TitleButton>
-                            </NavLinkButton>
-                        </ColumnCustom>
-                        <ColumnCustom theme={{ column: 6}}>
-                            <NavLinkButton to='/'>
-                                <TitleButton>CART</TitleButton>
+                        <ColumnCustom theme={{ column: 12 }}>
+                            <NavLinkButton to='/cart'>
+                                <TitleButton>
+                                    CART
+                                </TitleButton>
+                                <TitleNotification>{state.state.cartReducer.products.length}</TitleNotification>
                             </NavLinkButton>
                         </ColumnCustom>
                     </Row>
@@ -44,5 +36,4 @@ function navBar() {
         </div>
     );
 }
-
-export default navBar;
+export default connect(UtilStore.mapStateToProps)(navBar);
