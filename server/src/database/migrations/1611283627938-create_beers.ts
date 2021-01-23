@@ -36,6 +36,10 @@ export class createBeers1611283627938 implements MigrationInterface {
                     name: 'image_url',
                     type: 'string',
                 },
+                {
+                    name: 'amount',
+                    type: 'number',
+                },
             ]
         }));
     }

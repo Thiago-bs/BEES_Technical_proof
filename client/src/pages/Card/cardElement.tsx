@@ -12,6 +12,7 @@ export const CardWrapper = styled.div`
     font-family: Quicksand, arial, sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
     border-radius: 5px;
+    position: relative; 
 `;
 
 export const CardHeader = styled.header`
@@ -36,18 +37,24 @@ export const CardHeading = styled.h1`
 export const CardBody = styled.div`
     padding-right: 16px;
     padding-left: 16px;
+    position: absolute;
+    width: 100%;
+    bottom: 1;
 `;
 
 export const CardFooter = styled.div`
     padding-right: 16px;
     padding-left: 10px;
     padding-top: 32px;
+    padding-bottom: 16px;
+    position: absolute;
+    bottom: 0;
 `
 export const CardInput = styled.input`
   padding: 7px 0;
   width: 100%;
-  font-family: inherit;
   font-size: 14px;
+  text-align:center;
   border: 1px solid #ddd;
   transition: border-bottom-color 0.25s ease-in;
   align-items: center;
@@ -167,77 +174,15 @@ export const BeerPromotion = styled.h1`
     padding-top: 1.5em;
 `
 
-export const Container = styled.div`
-    max-width: 1360;
-    padding-right: 15px;
-    padding-right: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    box-sizing: border-box;
-    &:before,
-    &:after {
-        content: " ";
-        display: table;
-    }
-    &after{
-        clear: both;
-    }
-`
-
-export const Row = styled.div`
-    width: 100%;
-    height: auto;
-    float: left;
-    box-sizing: border-box;
-    &:before,
-    &:after {
-        content: " ";
-        display: table; 
-    }
-    &after{
-        clear: both;
-    }
-`
-
-function getWidthGrid(value: any){
-
-    if(!value) return;
-
-    let width = value / 12 * 100;
-    return `${width}%;`;
-}
-
-
-export const Column = styled.div`
-    float: left; 
-    padding: .25rem;
-    min-height: 1px;
-    box-sizing: border-box;
-    color:#000;
-    @media only screen and (max-width: 768px){
-        width: ${props => getWidthGrid(props.theme.devices.mobile)};
-    }
-    @media only screen and (min-width: 768px){
-        width: ${props => getWidthGrid(props.theme.devices.tablet)};
-    }
-    @media only screen and (min-width: 1000px){
-        width: ${props => getWidthGrid(props.theme.devices.desktop)};
-    }
-`;
-
-export const ColumnCustom = styled.div`
-    float: left;
-    padding: .25rem;
-    min-height: 1px;
-    box-sizing: border-box;
-    width: ${props => getWidthGrid(props.theme.column)};
-   
-`;
-
-
 export const BeerViewLink = styled(Link)`
     font-size: 0.5em;
     text-align: left;
     color: #7796be;
     font-style: bold;
+`
+
+export const Button = styled.button`
+    background: transparent;
+    border: 0px;
+    outline: none;
 `

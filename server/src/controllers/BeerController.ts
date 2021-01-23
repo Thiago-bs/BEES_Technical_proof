@@ -28,6 +28,7 @@ export default {
             cost,  
             promotion,
             image_url,
+            amount
         } = request.body;
     
         const beersRepository = getRepository(Beer);
@@ -38,6 +39,7 @@ export default {
             cost,  
             promotion,
             image_url, 
+            amount
         }
 
         const schema = Yup.object().shape({
@@ -46,6 +48,7 @@ export default {
             cost: Yup.number().required(),
             promotion: Yup.string().required().max(300),
             image_url: Yup.string().required(),
+            amount: Yup.number().required(),
 
         })
     

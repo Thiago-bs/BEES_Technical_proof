@@ -20,5 +20,8 @@ export default class Beer{
     
     @Column()
     image_url: string;
+
+    @Column()
+    amount: number;
  
 }

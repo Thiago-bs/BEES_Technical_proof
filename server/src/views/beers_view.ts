@@ -9,6 +9,7 @@ export default {
             cost: beer.cost,
             promotion:  beer.promotion,
             image_url: beer.image_url,
+            amount: beer.amount,
         };
     },
     renderMany(beers: Beer[]){
