@@ -29,16 +29,18 @@ export const NavLinkButton = styled(Link)`
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
+  margin-top: -30px;
   cursor: pointer;
   &.active {
     color: #15cdfc;
   }
 `
-export const Title = styled.h1`
+export const Title = styled.h2`
     font-size: 1.5em;
     text-align: center;
     color: #fff;
     text-align:center;
+    margin-top: -20px;
 `
 export const TitleButton = styled.h1`
     font-size: 0.8em;

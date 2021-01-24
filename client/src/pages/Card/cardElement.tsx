@@ -11,7 +11,7 @@ export const CardWrapper = styled.div`
     width: 300px;
     height: 430px;
     font-family: Quicksand, arial, sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05), 0 0px 5px rgba(0, 0, 0, 0.10);
     border-radius: 5px;
     position: relative; 
 `;
@@ -52,8 +52,6 @@ export const CardHeading = styled.h1`
     height: auto;
     max-width:200px;
     max-height:150px;
-    width: 100px;
-    height: 150px;
     justify-content: center;
 `;
 
@@ -139,6 +137,8 @@ export const PlusCircleCustom = styled(Plus)`
     &:hover {
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
     transform: translate(0, -3px);
+    border-color: #7796be;
+    color: #7796be;
     }
     background-color: #fff;
     border-style: solid;
@@ -157,6 +157,8 @@ export const MinusCircleCustom = styled(Minus)`
     &:hover {
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
     transform: translate(0, -3px);
+    border-color: #7796be;
+    color: #7796be;
     }
     background-color: #fff;
     border-style: solid;
@@ -189,7 +191,7 @@ export const CardButton = styled.button`
 
 
 export const BeerTitle = styled.h1`
-    font-size: 1.2em;
+    font-size: 1.0em;
     text-align: left;
     color: #1d1d1d;
     font-style: bold;
@@ -198,6 +200,7 @@ export const BeerTitle = styled.h1`
 export const BeerDetail = styled.h1`
     font-size: 0.6em;
     text-align: left;
+    padding-top: 1.5px;
     color: #bfc2c0;
     font-style: bold;
 `
@@ -207,7 +210,7 @@ export const BeerCost = styled.h1`
     text-align: left;
     color: #393939;
     font-style: bold;
-    padding-top: 1em;
+    padding-top: 0.7em;
 `
 export const BeerAmount = styled.h1`
     font-size: 0.6em;
@@ -221,7 +224,7 @@ export const BeerPromotion = styled.h1`
     text-align: left;
     color: #6bab7c;
     font-style: bold;
-    padding-top: 1.5em;
+    padding-top: 1.2em;
 `
 
 export const BeerViewLink = styled(Link)`
@@ -229,6 +232,7 @@ export const BeerViewLink = styled(Link)`
     text-align: left;
     color: #7796be;
     font-style: bold;
+    margin-top: 10px;
 `
 
 

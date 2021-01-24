@@ -44,7 +44,6 @@ function Cart(state: any) {
         dispatch(CartActions.deleteItemOnCart(cart, beerToRemove, index));
         let changedBeers = state.state.cartReducer.products;
         setBeers(changedBeers)
-        console.log(changedBeers,"aqui")
     }
     return (
         <div>
@@ -61,7 +60,7 @@ function Cart(state: any) {
                                     <ColumnCustom theme={{ column: 2 }}>
                                         <CartImage theme={{ image: { url: beer.image_url } }}></CartImage>
                                     </ColumnCustom>
-                                    <ColumnCustom theme={{ column: 9 }}>
+                                    <ColumnCustom theme={{ column: 8 }}>
                                         <CardBody>
                                             <BeerTitle> {beer.name} </BeerTitle>
                                             <BeerDetail> {beer.detail}</BeerDetail>
@@ -70,7 +69,7 @@ function Cart(state: any) {
                                             <BeerPromotion> {beer.promotion} </BeerPromotion>
                                         </CardBody>
                                     </ColumnCustom>
-                                    <ColumnCustom theme={{ column: 1 }}>
+                                    <ColumnCustom theme={{ column: 2 }}>
                                         <Button onClick={() => removeItem(beer, index)} >
                                             <TrashCustom theme={{ color: '#e9093a' }} >
                                             </TrashCustom>

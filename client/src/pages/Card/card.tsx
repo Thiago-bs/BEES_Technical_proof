@@ -94,7 +94,7 @@ function Card(state: any) {
                                     <CardBody>
                                         <BeerTitle> {beer.name} </BeerTitle>
                                         <BeerDetail> {beer.detail}</BeerDetail>
-                                        <BeerCost> RD${beer.cost}/Unit </BeerCost>
+                                        <BeerCost> RD${(beer.cost).toFixed(2)}/Unit </BeerCost>
                                         <BeerPromotion> {beer.promotion} </BeerPromotion>
                                         <BeerViewLink to='/'> View details</BeerViewLink>
                                     </CardBody>
