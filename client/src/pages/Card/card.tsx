@@ -37,7 +37,6 @@ function Card(state: any) {
 
     const [beersNotSorted, setBeers] = useState<Beer[]>([]);
     let beers = beersNotSorted.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
-    beers = beers.map(beer=> ({ ...beer, notActive: true }))
 
     const cart = state.state.cartReducer;
     const dispatch: Dispatch<any> = useDispatch();
@@ -45,7 +44,6 @@ function Card(state: any) {
     useEffect(() => {
         api.get('beers').then(response => {
             setBeers(response.data);
-            console.log(response.data)
         });
     }, []);
 
@@ -67,13 +65,11 @@ function Card(state: any) {
     }
 
     function addToCart(beerToAdd: Beer){
-        console.log(beerToAdd.amount, "see here")
-        console.log(beerToAdd, "see here2")
         if(beerToAdd.amount === 0) {
             alert("TO ADD TO THE CART YOU NEED TO ADD AT LEAST ONE!");
             return
         }
-        dispatch(CartActions.changeCart(cart, beerToAdd));
+        dispatch(CartActions.changeCart(cart, beerToAdd, beerToAdd.amount));
         let changedBeers = beers.map(element => {
             if (element.id === beerToAdd.id) {
                 element.amount = 0;

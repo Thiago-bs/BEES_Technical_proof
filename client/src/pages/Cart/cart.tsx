@@ -10,14 +10,16 @@ import {
     BeerDetail,
     BeerCost,
     BeerPromotion,
-    BeerViewLink,
-    BeerAmount
+    BeerAmount,
+    Button,
 } from "../Card/cardElement";
 import { Container, Row, ColumnCustom} from '../Util/grid';
-import {GoBack, CartWrapper, CartImage} from './cartElement'
-import { connect } from 'react-redux';
+import {GoBack, CartWrapper, CartImage, TrashCustom} from './cartElement'
+import { connect, useDispatch } from 'react-redux';
 import * as UtilStore from '../../store/Util/util';
 import Beer from '../../models/Beer'
+import { Dispatch } from "redux";
+import * as CartActions from '../../store/actions/cart';
 
 const definedColumn = {
     devices: {
@@ -27,16 +29,23 @@ const definedColumn = {
     }
 }
 
-
 function Cart(state: any) {
-    const [beers, setBeers] = useState<Beer[]>([]);
+    let [beers, setBeers] = useState<Beer[]>([]);
     const beersx = state.state.cartReducer.products;
-    console.log(beersx)
+    const cart = state.state.cartReducer;
+    const dispatch: Dispatch<any> = useDispatch();
     useEffect(() => {
         if(beersx.length > 0) {
             setBeers(beersx)
         }
     }, [beersx]);
+
+    function removeItem(beerToRemove: Beer, index: number){
+        dispatch(CartActions.deleteItemOnCart(cart, beerToRemove, index));
+        let changedBeers = state.state.cartReducer.products;
+        setBeers(changedBeers)
+        console.log(changedBeers,"aqui")
+    }
     return (
         <div>
             <CardWrapperCustom theme={definedColumn}>
@@ -49,17 +58,23 @@ function Cart(state: any) {
                             <CartWrapper key={index}>
                                 <Container>
                                     <Row>
-                                    <ColumnCustom theme={{ column: 1 }}>
+                                    <ColumnCustom theme={{ column: 2 }}>
                                         <CartImage theme={{ image: { url: beer.image_url } }}></CartImage>
                                     </ColumnCustom>
-                                    <ColumnCustom theme={{ column: 8 }}>
+                                    <ColumnCustom theme={{ column: 9 }}>
                                         <CardBody>
                                             <BeerTitle> {beer.name} </BeerTitle>
                                             <BeerDetail> {beer.detail}</BeerDetail>
                                             <BeerAmount> Amount: {beer.amount} </BeerAmount>
-                                            <BeerCost> Price to pay:  </BeerCost>
+                                            <BeerCost> Price to pay:  RD$ {(beer.amount * beer.cost).toFixed(2)}</BeerCost>
                                             <BeerPromotion> {beer.promotion} </BeerPromotion>
                                         </CardBody>
+                                    </ColumnCustom>
+                                    <ColumnCustom theme={{ column: 1 }}>
+                                        <Button onClick={() => removeItem(beer, index)} >
+                                            <TrashCustom theme={{ color: '#e9093a' }} >
+                                            </TrashCustom>
+                                        </Button>
                                     </ColumnCustom>
                                     </Row>
                                 </Container>
